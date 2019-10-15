@@ -25,6 +25,6 @@ usage() {
 #sh $0 -n sample
 
 git add .
-git commit -m $1
+git commit -m $(date "+%Y-%m-%d(%H:%M:%S)")
 git status
 git push origin master

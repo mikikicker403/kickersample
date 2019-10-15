@@ -7,6 +7,7 @@ logging.debug('program start')
 print('帽子の向きを揃える。連続した帽子はまとめて変えることができる。連続した帽子の組が少ない方を変更させるのが良い')
 cap1=['F','F','B','B','B','F','B','B','B','F','F','B','F']
 cap2=['F','F','B','B','B','F','B','B','B','F','F','F','F']
+cap3=['F','F','B','H','B','F','B','B','B','F','H','F','F']
 
 def pleaseConform(caps):
     print('pleaseConform start')
@@ -102,6 +103,39 @@ def pleaseConform2(caps):
 
 
 
+def pleaseConform4(caps):
+    print('pleaseConform start')
+    start=forward=backward=0
+    intervals=[]#連続したcapの組（startpos,endpos,FW)
+    caps=caps+['END']
+    for i in range(1,len(caps)):
+        if caps[start]!=caps[i]:
+            intervals.append((start,i-1,caps[start]))
+            if caps[start]=='F':
+                forward+=1
+            elif caps[start]=='B':
+                backward+=1
+            start=i
+    if caps[start]=='F':
+        forward+=1
+    else:
+        backward+=1
+    #前後どちらに合わせるか判定
+    print('F:{forward} // B:{backward}'.format(forward=forward,backward=backward))
+    if forward<backward:
+        flip='F'#backwardへチェンジ
+    else:
+        flip='B'#forwardへチェンジ
+
+    #かぶり直す命令
+    for t in intervals:
+        if t[2]==flip:
+            if t[0]==t[1]:
+                print('Person at positon',t[0],'flip your cap!')
+            else:
+                print('People in positions',t[0],'through',t[1],'flip your caps!')
+
+
 def pleaseConformOnepass(caps):
     caps=caps+[caps[0]]
     for i in range(1,len(caps)):
@@ -135,8 +169,37 @@ def pleaseConformOnepass2(caps):
 
 #文字列を13W2B12W5Bのように圧縮する
 characters='WWWWWWWWWWWWWBBWWWWWWWWWWWWBBBBB'
-def compressText(tex):
-   pass 
+def compressText(tex):#ランレングス符号化
+    tex=tex+'0'
+    answer=''
+    num=1
+    character=''
+    for i in range(1,len(tex)):
+        
+        if tex[i-1]==tex[i]:
+            num+=1
+        else:
+            character+=str(num)+tex[i-1]
+            num=1
+            #print(character)
+        #print(i,num,tex[i])
+    print(character)
+        
+        
+def revcompressText(tex):#ランレングス復号化
+    st=0
+    en=0
+    character=''
+    for i in range(1,len(tex)):
+        if tex[i].isalpha():
+            en=i
+            character+=tex[i]*int(tex[st:en])
+            #print(character)
+            st=i+1
+    print(character)
+    return character
+
+    pass
 
 
 if __name__=='__main__':
@@ -155,6 +218,12 @@ if __name__=='__main__':
     pleaseConformOnepass2(cap1)
     print('empty') 
     pleaseConformOnepass2([])
+    print(cap3)
+    pleaseConform4(cap3)
+
+    compressText(characters)
+    revcharacters='13W2B12W5B'
+    revcompressText(revcharacters)
     
     pass
 

@@ -233,7 +233,7 @@ def ComputerAssistant3():
                 number=number*(i+1)//(i+2)
             
                 n=number%52
-                cards.append(deck[n])
+                cards.append(deck2[n])
                 cind.append(n)
                 cardsuits.append(n//13)
                 cnumbers.append(n%13)
@@ -288,9 +288,9 @@ def ComputerAssistant3():
             second,third,fourth=ind[2],ind[0],ind[1]
         elif code==6:
             second,third,fourth=ind[2],ind[1],ind[0]
-        print('Assistant:Second card is:',deck[second])
-        print('Assistant:Third card is:',deck[third])
-        print('Assistant:Fourth card is:',deck[fourth])
+        print('Assistant:Second card is:',deck2[second])
+        print('Assistant:Third card is:',deck2[third])
+        print('Assistant:Fourth card is:',deck2[fourth])
         '''
         if len(set(cnumbers))==len(cnumbers):
             pass
@@ -311,7 +311,7 @@ def ComputerAssistant3():
             print('ENCODE:',code)
             '''
     print('Assistant:Cards are character strings as shown below.')
-    print('Assistant:Ordering is:',deck)
+    print('Assistant:Ordering is:',deck2)
     cards,cind,cardsuits,cnumbers,numsuits,pairsuit=card_draw()
 
     cardh=[]

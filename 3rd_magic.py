@@ -221,8 +221,8 @@ def ComputerAssistant():
         print('The Answer is',cards[hidden])
     return 
 
-
-def ComputerAssistant2():
+#deck2
+def ComputerAssistant3():
     def card_draw():
         while True:
             cards,cind,cardsuits,cnumbers=[],[],[],[]
@@ -235,11 +235,11 @@ def ComputerAssistant2():
                 n=number%52
                 cards.append(deck[n])
                 cind.append(n)
-                cardsuits.append(n%4)
-                cnumbers.append(n//4)
-                numsuits[n%4]+=1
-                if numsuits[n%4] > 1:
-                    pairsuit=n%4
+                cardsuits.append(n//13)
+                cnumbers.append(n%13)
+                numsuits[n//13]+=1
+                if numsuits[n//13] > 1:
+                    pairsuit=n//13
             if len(set(cards))==len(cards):
                 print(cards)
                 return cards,cind,cardsuits,cnumbers,numsuits,pairsuit
@@ -331,7 +331,7 @@ def ComputerAssistant2():
     else:
         print('Sorry,not impressed!')
         print('The Answer is',cards[hidden])
-    return 
+    return #EndComputerassistant3
 
 
 def AssistantOrdersCards2():
@@ -421,7 +421,10 @@ def AssistantOrdersCards2():
     sortList2(remindices)
     outputNext3Cards(encode,remindices)
     return 
-def ComputerAssistant3():
+
+
+
+def ComputerAssistant2():
     def card_draw():
         while True:
             cards,cind,cardsuits,cnumbers=[],[],[],[]

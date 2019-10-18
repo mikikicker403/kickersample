@@ -25,7 +25,8 @@ def noConflicts(board,current,qindex,n):
 
 def FourQueens(n=4):
     #noConflicts(board,column,row,n)
-    board=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    #board=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+    board=[[0]*n for i in range(n)]
     #print(board)
     for i in range(n):
         board[i][0]=1
@@ -55,6 +56,10 @@ if __name__=='__main__':
     #ret=noConflicts(B,1,2,4)
     #print(ret)
     FourQueens()
+    print('#'*10)
+    FourQueens(5)
+    print('#'*10)
+    FourQueens(3)
 
     pass
 

@@ -124,9 +124,6 @@ def Good3(comb,talents,dic):
         ability_set=set(all_ability)
         if (ab in ability_set):
             num+=1
-            if len(talents)==num:
-                with open('comb.txt','a') as f:
-                    f.write(','.join(comb))
     return num
 
 def Hire4Show2(dic):
@@ -145,13 +142,7 @@ def Hire4Show3(dic):
     num=0
     counter=0
     hire=[]
-    item_name=[]
-    for k in dic.keys():
-        item_name.append(dic[k])    
-    else:
-        length=len(set(item_name))
-    #for i in range(1,len(dic.keys())+1):
-    for i in range(1,length+1):
+    for i in range(1,len(dic.keys())+1):
         for ele in itertools.combinations(dic.keys(),i):
             print(ele)
             num=Good3(ele,Talents,dic)
@@ -159,7 +150,6 @@ def Hire4Show3(dic):
                 hire=ele
                 counter=num
                 print('len(ele) is 更新:',ele,len(ele),'// num:',counter)
-                time.sleep(1)
     print('Optimum Solution:',hire,',fill condition:',num,',length:',len(hire))
 if __name__=='__main__':
 

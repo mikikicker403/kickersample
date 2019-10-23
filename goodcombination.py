@@ -24,7 +24,7 @@ def get_data(keyword=''):
         soup=bs4.BeautifulSoup(html)
         return soup
     for i in range(1,10):
-        url=baseurl.format(keyword=keyword,page=1)
+        url=baseurl.format(keyword=keyword,page=i)
         try:
             soup=get_soup(url)
         except Exception as e:
@@ -124,6 +124,9 @@ def Good3(comb,talents,dic):
         ability_set=set(all_ability)
         if (ab in ability_set):
             num+=1
+            if len(talents)==num:
+                with open('comb.txt','a') as f:
+                    f.write(','.join(comb)+'\n')
     return num
 
 def Hire4Show2(dic):
@@ -142,14 +145,23 @@ def Hire4Show3(dic):
     num=0
     counter=0
     hire=[]
-    for i in range(1,len(dic.keys())+1):
+    item_name=[]
+    for k in dic.keys():
+        item_name.append(dic[k])    
+    else:
+        length=len(set(item_name))
+    #for i in range(1,len(dic.keys())+1):
+    for i in range(1,length-3):
         for ele in itertools.combinations(dic.keys(),i):
-            print(ele)
+            #print(ele)
+            logging.debug('{combination}'.format(combination=','.join(ele)))
             num=Good3(ele,Talents,dic)
             if num>counter:
                 hire=ele
                 counter=num
                 print('len(ele) is 更新:',ele,len(ele),'// num:',counter)
+                logging.waring('Optimum Solution:{hire} // fill condition:{num} // legth:{length}'.format(hire=','.join(hire),num=num,length=len(hire)))
+                time.sleep(3)
     print('Optimum Solution:',hire,',fill condition:',num,',length:',len(hire))
 if __name__=='__main__':
 
@@ -161,9 +173,11 @@ if __name__=='__main__':
     #    print(v)
     get_data('ブリス　スポンジSP')
     get_data('シュアラスター　スポンジ')
-    get_data('ブリス　スポンジSP')
+    get_data('クリンビュー　水垢リムーバー')
     get_data('フエキ　工業用 KGM')
     get_data('リンレイ　水アカスポットクリーナー')
+    #dic=read_CsvToDic()
+    #Hire4Show3(dic)
     pass
 
 

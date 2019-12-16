@@ -32,7 +32,15 @@ class DrawNetwork:
                 self.g.nodes[k][k2]=v
         
     def draw_network(self,figname='test.svg'):
-        pos=nx.spring_layout(self.g)
+        #pos=nx.spring_layout(self.g)
+        #pos=nx.circular_layout(self.g)
+        ##pos=nx.kamada_kawai_layout(self.g)
+        #pos=nx.planar_layout(self.g)
+        #pos=nx.random_layout(self.g)
+        ##pos=nx.rescale_layout(self.g)
+        pos=nx.shell_layout(self.g)
+        #pos=nx.spectral_layout(self.g)
+        #pos=nx.spiral_layout(self.g)
         
         #node
         #node_shape s0^>V<dph8
@@ -44,11 +52,6 @@ class DrawNetwork:
         print(node_alpha)
         nx.draw_networkx_nodes(self.g,pos,node_color=node_colors,node_size=node_size,alpha=node_alpha)
 
-        #node label
-        #font_family font_color:string only //  font_size int only
-        #nx.draw_networkx_labels(self.g,pos,font_family=self.font_family,font_size=5,font_color='black',alpha=0.8)
-        labeldic={w:i for i,w in enumerate(self.g.nodes)}
-        nx.draw_networkx_labels(self.g,pos,labels=labeldic,font_family=self.font_family,font_size=5,font_color='black',style='bold',alpha=1.0)
         
 
         #edge draw
@@ -60,7 +63,15 @@ class DrawNetwork:
         #edge label
         #edgelabeldic={w:float(self.g.edges.get(w).get('width',1)) for w in self.g.edges} 
         #nx.draw_networkx_edge_labels(self.g,pos,edge_labels=edgelabeldic,alpha=0.5)
+        plt.xticks([])
+        plt.yticks([])
+        plt.savefig('draft_'+figname,dpi=1200)
 
+        #node label
+        #font_family font_color:string only //  font_size int only
+        #nx.draw_networkx_labels(self.g,pos,font_family=self.font_family,font_size=5,font_color='black',alpha=0.8)
+        labeldic={w:i for i,w in enumerate(self.g.nodes)}
+        nx.draw_networkx_labels(self.g,pos,labels=labeldic,font_family=self.font_family,font_size=5,font_color='black',style='bold',alpha=1.0)
 
         plt.xticks([])
         plt.yticks([])
@@ -90,6 +101,6 @@ if __name__=='__main__':
     ob.add_data()
     ob.add_nodes(node_dic)
     ob.cut_tree()
-    ob.draw_network('test.svg')
+    ob.draw_network('test.png')
 
     
